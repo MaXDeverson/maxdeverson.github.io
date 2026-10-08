@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Neonwhitepink | Mobile game studio</title>
+    <meta name="description" content="Neonwhitepink is an independent studio making mobile games for Android and iOS.">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='12' y='12' width='40' height='40' fill='%23E6007E'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #ffffff;
+            --ink: #000000;
+            --ink-soft: #5c5c5c;
+            --line: #e4e4e4;
+            --tile: #f3f3f3;
+            --accent: #e6007e;
+            --font: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+            --wrap: 70rem;
+            --label: 12rem;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: var(--paper);
+            color: var(--ink);
+            font-family: var(--font);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+        a:hover { color: var(--accent); }
+        a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+        .wrap { width: min(100% - 3rem, var(--wrap)); margin-inline: auto; }
+
+        .skip { position: absolute; left: -999px; top: .75rem; background: var(--ink); color: #fff; padding: .5rem 1rem; z-index: 10; }
+        .skip:focus { left: .75rem; color: #fff; }
+
+        /* Header */
+        .site-header { border-bottom: 1px solid var(--line); }
+        .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: .75rem 2rem; flex-wrap: wrap; padding-block: 1.25rem; }
+        .mark { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; text-decoration: none; }
+        .mark::before { content: ""; width: .7rem; height: .7rem; background: var(--accent); }
+        .site-nav { display: flex; gap: 2rem; }
+        .site-nav a { text-decoration: none; }
+
+        /* Hero */
+        .hero { padding-block: clamp(4.5rem, 12vw, 9rem) clamp(3.5rem, 9vw, 6.5rem); }
+        .hero h1 {
+            margin: 0 0 1.5rem;
+            font-size: clamp(2.5rem, 11vw, 7.5rem);
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: -.045em;
+        }
+        .hero p { margin: 0; max-width: 30ch; font-size: clamp(1.125rem, 1.8vw, 1.375rem); line-height: 1.45; color: var(--ink-soft); }
+
+        /* Sections: label column + content column */
+        .section { border-top: 1px solid var(--line); padding-block: clamp(3rem, 7vw, 5rem); }
+        .section .wrap { display: grid; grid-template-columns: var(--label) minmax(0, 1fr); gap: 1.25rem 2rem; }
+        .section h2 { margin: 0; font-size: 1rem; font-weight: 600; line-height: 1.6; }
+
+        /* Games */
+        .games { list-style: none; margin: 0; padding: 0; }
+        .game {
+            display: grid;
+            grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+            gap: .75rem 1.5rem;
+            align-items: start;
+            padding-block: 1.5rem;
+            border-bottom: 1px solid var(--line);
+        }
+        .game:first-child { padding-top: 0; }
+        .game:last-child { border-bottom: 0; padding-bottom: 0; }
+        .game-icon {
+            width: 3.5rem; aspect-ratio: 1;
+            border-radius: 22%;
+            background: var(--tile);
+            display: grid; place-items: center;
+            font-size: .9rem; font-weight: 600; color: var(--ink-soft);
+            overflow: hidden;
+        }
+        .game-icon img { width: 100%; height: 100%; object-fit: cover; }
+        .game h3 { margin: 0; font-size: 1.125rem; font-weight: 600; line-height: 1.4; }
+        .game p { margin: .2rem 0 0; color: var(--ink-soft); max-width: 50ch; }
+        .game-links { display: flex; gap: 1.5rem; padding-top: .1rem; }
+        .game-links a, .status { white-space: nowrap; font-size: .975rem; }
+        .status { color: var(--ink-soft); }
+
+        /* Studio */
+        .prose p { margin: 0 0 1rem; max-width: 58ch; }
+        .prose p:last-child { margin-bottom: 0; }
+
+        /* Contact */
+        .contact p { margin: 0 0 1.25rem; max-width: 50ch; color: var(--ink-soft); }
+        .email { font-size: clamp(1.25rem, 3.2vw, 1.875rem); font-weight: 500; letter-spacing: -.02em; overflow-wrap: anywhere; }
+
+        /* Footer */
+        .site-footer { border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .9rem; }
+        .site-footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: 1.75rem 2.25rem; }
+        .site-footer a { color: var(--ink-soft); }
+
+        @media (max-width: 760px) {
+            .section .wrap { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 560px) {
+            .site-nav { gap: 1.5rem; }
+            .game { grid-template-columns: 3rem minmax(0, 1fr); }
+            .game-icon { width: 3rem; }
+            .game-links { grid-column: 2; }
+        }
+    </style>
+</head>
+<body>
+<a class="skip" href="#games">Skip to games</a>
+
+<header class="site-header">
+    <div class="wrap">
+        <a class="mark" href="#top">Neonwhitepink</a>
+        <nav class="site-nav" aria-label="Main">
+            <a href="#games">Games</a>
+            <a href="#studio">Studio</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<main id="top">
+    <section class="hero">
+        <div class="wrap">
+            <h1>Neonwhitepink</h1>
+            <p>An independent studio making mobile games for Android and iOS.</p>
+        </div>
+    </section>
+
+    <section class="section" id="games" aria-labelledby="games-title">
+        <div class="wrap">
+            <h2 id="games-title">Games</h2>
+            <ul class="games">
+
+                <!-- GAME: copy this whole <li> block to add a game.
+                     Replace the title, description and the store links (href="#").
+                     To use a real icon, replace "GD" with: <img src="icons/glow-drift.png" alt=""> -->
+                <li class="game">
+                    <div class="game-icon" aria-hidden="true">GD</div>
+                    <div>
+                        <h3>Glow Drift</h3>
+                        <p>One-thumb arcade racing through a city at night.</p>
+                    </div>
+                    <div class="game-links">
+                        <a href="#">Google Play</a>
+                        <a href="#">App Store</a>
+                    </div>
+                </li>
+
+                <li class="game">
+                    <div class="game-icon" aria-hidden="true">PC</div>
+                    <div>
+                        <h3>Pop Circuit</h3>
+                        <p>A puzzle game about connecting wires and closing circuits.</p>
+                    </div>
+                    <div class="game-links">
+                        <a href="#">Google Play</a>
+                        <a href="#">App Store</a>
+                    </div>
+                </li>
+
+                <!-- A game that isn't out yet: no store links, just the status. -->
+                <li class="game">
+                    <div class="game-icon" aria-hidden="true">NB</div>
+                    <div>
+                        <h3>Night Bloom</h3>
+                        <p>A relaxing idle garden where flowers open after dark.</p>
+                    </div>
+                    <div class="game-links">
+                        <span class="status">In development</span>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+    <section class="section" id="studio" aria-labelledby="studio-title">
+        <div class="wrap">
+            <h2 id="studio-title">Studio</h2>
+            <div class="prose">
+                <p>Neonwhitepink makes mobile games that are quick to learn and easy to come back to. We design for phones first: short sessions, one-hand controls and solid performance on older devices.</p>
+                <p>Every game we release keeps receiving updates and fixes for as long as people play it.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="wrap">
+            <h2 id="contact-title">Contact</h2>
+            <div>
+                <p>For support, partnerships and press, write to us. We reply within a few days.</p>
+                <!-- Replace both the href and the visible address with your real email -->
+                <a class="email" href="mailto:contact@neonwhitepink.com">contact@neonwhitepink.com</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="wrap">
+        <span>&copy; 2026 Neonwhitepink</span>
+        <!-- Uncomment once you add a privacy policy page (Google Play requires one for apps with ads):
+        <a href="privacy.html">Privacy policy</a>
+        -->
+    </div>
+</footer>
+</body>
+</html>
