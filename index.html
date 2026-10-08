@@ -4,117 +4,206 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Neonwhitepink | Mobile game studio</title>
-    <meta name="description" content="Neonwhitepink is an independent studio making mobile games for Android and iOS.">
-    <meta name="theme-color" content="#ffffff">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect x='12' y='12' width='40' height='40' fill='%23E6007E'/></svg>">
+    <meta name="description" content="Neonwhitepink is an independent studio making mobile games. Our latest release is Portal Quest, a portal puzzle game for Android.">
+    <meta name="theme-color" content="#0a0a0c">
+    <meta name="color-scheme" content="dark">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230a0a0c'/><rect x='20' y='20' width='24' height='24' rx='3' fill='%23ff3d9a'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --paper: #ffffff;
-            --ink: #000000;
-            --ink-soft: #5c5c5c;
-            --line: #e4e4e4;
-            --tile: #f3f3f3;
-            --accent: #e6007e;
+            --bg: #0a0a0c;
+            --surface: #111115;
+            --line: #222228;
+            --line-strong: #33333c;
+            --text: #ececf1;
+            --text-soft: #9a9aa6;
+            --text-faint: #7c7c88;
+            --accent: #ff3d9a;
             --font: "Instrument Sans", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
             --wrap: 70rem;
             --label: 12rem;
+            --radius: 1rem;
+            color-scheme: dark;
         }
 
         *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
         body {
             margin: 0;
-            background: var(--paper);
-            color: var(--ink);
+            background:
+                radial-gradient(60rem 32rem at 12% -12rem, rgba(255, 61, 154, .09), transparent 70%),
+                var(--bg);
+            background-repeat: no-repeat;
+            color: var(--text);
             font-family: var(--font);
             font-size: 1.0625rem;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
         img { max-width: 100%; display: block; }
-        a { color: var(--ink); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+        a { color: var(--text); text-decoration-thickness: 1px; text-underline-offset: .2em; transition: color .15s; }
         a:hover { color: var(--accent); }
-        a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+        a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+        ::selection { background: var(--accent); color: var(--bg); }
 
         .wrap { width: min(100% - 3rem, var(--wrap)); margin-inline: auto; }
 
-        .skip { position: absolute; left: -999px; top: .75rem; background: var(--ink); color: #fff; padding: .5rem 1rem; z-index: 10; }
-        .skip:focus { left: .75rem; color: #fff; }
+        .skip { position: absolute; left: -999px; top: .75rem; background: var(--text); color: var(--bg); padding: .5rem 1rem; z-index: 20; }
+        .skip:focus { left: .75rem; color: var(--bg); }
 
         /* Header */
-        .site-header { border-bottom: 1px solid var(--line); }
-        .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: .75rem 2rem; flex-wrap: wrap; padding-block: 1.25rem; }
-        .mark { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; text-decoration: none; }
-        .mark::before { content: ""; width: .7rem; height: .7rem; background: var(--accent); }
-        .site-nav { display: flex; gap: 2rem; }
-        .site-nav a { text-decoration: none; }
-
-        /* Hero */
-        .hero { padding-block: clamp(4.5rem, 12vw, 9rem) clamp(3.5rem, 9vw, 6.5rem); }
-        .hero h1 {
-            margin: 0 0 1.5rem;
-            font-size: clamp(2.5rem, 11vw, 7.5rem);
-            font-weight: 600;
-            line-height: 1;
-            letter-spacing: -.045em;
-        }
-        .hero p { margin: 0; max-width: 30ch; font-size: clamp(1.125rem, 1.8vw, 1.375rem); line-height: 1.45; color: var(--ink-soft); }
-
-        /* Sections: label column + content column */
-        .section { border-top: 1px solid var(--line); padding-block: clamp(3rem, 7vw, 5rem); }
-        .section .wrap { display: grid; grid-template-columns: var(--label) minmax(0, 1fr); gap: 1.25rem 2rem; }
-        .section h2 { margin: 0; font-size: 1rem; font-weight: 600; line-height: 1.6; }
-
-        /* Games */
-        .games { list-style: none; margin: 0; padding: 0; }
-        .game {
-            display: grid;
-            grid-template-columns: 3.5rem minmax(0, 1fr) auto;
-            gap: .75rem 1.5rem;
-            align-items: start;
-            padding-block: 1.5rem;
+        .site-header {
+            position: sticky; top: 0; z-index: 10;
+            background: rgba(10, 10, 12, .72);
+            -webkit-backdrop-filter: saturate(140%) blur(14px);
+            backdrop-filter: saturate(140%) blur(14px);
             border-bottom: 1px solid var(--line);
         }
-        .game:first-child { padding-top: 0; }
-        .game:last-child { border-bottom: 0; padding-bottom: 0; }
+        .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: .75rem 2rem; flex-wrap: wrap; padding-block: 1.1rem; }
+        .mark { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; text-decoration: none; letter-spacing: -.01em; }
+        .mark::before { content: ""; width: .65rem; height: .65rem; border-radius: 2px; background: var(--accent); box-shadow: 0 0 12px rgba(255, 61, 154, .55); }
+        .site-nav { display: flex; gap: 2rem; font-size: .975rem; }
+        .site-nav a { color: var(--text-soft); text-decoration: none; }
+        .site-nav a:hover { color: var(--text); }
+
+        /* Hero */
+        .hero { padding-block: clamp(5rem, 13vw, 10rem) clamp(4rem, 10vw, 7rem); }
+        .eyebrow {
+            margin: 0 0 1.5rem;
+            font-size: .8rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase;
+            color: var(--text-faint);
+        }
+        .hero h1 {
+            margin: 0 0 1.75rem;
+            font-size: clamp(2.75rem, 11vw, 7.5rem);
+            font-weight: 600;
+            line-height: .95;
+            letter-spacing: -.05em;
+        }
+        .hero h1 span { color: var(--accent); }
+        .hero p.lead { margin: 0; max-width: 32ch; font-size: clamp(1.125rem, 1.8vw, 1.375rem); line-height: 1.45; color: var(--text-soft); }
+        .hero-link {
+            display: inline-flex; align-items: center; gap: .5rem;
+            margin-top: 2.5rem;
+            font-size: .975rem; text-decoration: none; color: var(--text);
+        }
+        .hero-link span { color: var(--text-faint); }
+        .hero-link svg { transition: transform .2s; }
+        .hero-link:hover svg { transform: translateY(2px); }
+
+        /* Sections: label column + content column */
+        .section { border-top: 1px solid var(--line); padding-block: clamp(3.5rem, 8vw, 6rem); }
+        .section .wrap { display: grid; grid-template-columns: var(--label) minmax(0, 1fr); gap: 1.5rem 2rem; }
+        .section h2 {
+            margin: 0;
+            font-size: .8rem; font-weight: 500; line-height: 2.1; letter-spacing: .14em; text-transform: uppercase;
+            color: var(--text-faint);
+        }
+
+        /* Game card */
+        .game {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: clamp(1.25rem, 3vw, 2rem);
+        }
+        .game-head {
+            display: grid;
+            grid-template-columns: 5rem minmax(0, 1fr) auto;
+            gap: 1rem 1.5rem;
+            align-items: center;
+        }
         .game-icon {
-            width: 3.5rem; aspect-ratio: 1;
+            width: 5rem; aspect-ratio: 1;
             border-radius: 22%;
-            background: var(--tile);
-            display: grid; place-items: center;
-            font-size: .9rem; font-weight: 600; color: var(--ink-soft);
             overflow: hidden;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, .06);
         }
         .game-icon img { width: 100%; height: 100%; object-fit: cover; }
-        .game h3 { margin: 0; font-size: 1.125rem; font-weight: 600; line-height: 1.4; }
-        .game p { margin: .2rem 0 0; color: var(--ink-soft); max-width: 50ch; }
-        .game-links { display: flex; gap: 1.5rem; padding-top: .1rem; }
-        .game-links a, .status { white-space: nowrap; font-size: .975rem; }
-        .status { color: var(--ink-soft); }
+        .game h3 { margin: 0; font-size: 1.5rem; font-weight: 600; line-height: 1.2; letter-spacing: -.02em; }
+        .game-meta { margin: .35rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; padding: 0; }
+        .game-meta li {
+            font-size: .8rem; color: var(--text-soft);
+            border: 1px solid var(--line-strong); border-radius: 999px;
+            padding: .1rem .6rem;
+        }
+        .game-desc { margin: 1.5rem 0 0; max-width: 62ch; color: var(--text-soft); }
+
+        .store-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+            padding: .75rem 1.25rem;
+            border-radius: 999px;
+            background: var(--text); color: var(--bg);
+            font-size: .95rem; font-weight: 600; text-decoration: none; white-space: nowrap;
+            transition: background-color .15s, color .15s, box-shadow .15s;
+        }
+        .store-btn:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 24px rgba(255, 61, 154, .35); }
+        .store-btn:focus-visible { outline-offset: 4px; border-radius: 999px; }
+
+        .shots {
+            list-style: none; margin: 1.75rem 0 0; padding: 0;
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .75rem;
+        }
+        .shots img {
+            width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;
+            border-radius: .6rem;
+            border: 1px solid var(--line);
+            background: var(--bg);
+        }
 
         /* Studio */
         .prose p { margin: 0 0 1rem; max-width: 58ch; }
         .prose p:last-child { margin-bottom: 0; }
+        .prose p + p { color: var(--text-soft); }
 
         /* Contact */
-        .contact p { margin: 0 0 1.25rem; max-width: 50ch; color: var(--ink-soft); }
-        .email { font-size: clamp(1.25rem, 3.2vw, 1.875rem); font-weight: 500; letter-spacing: -.02em; overflow-wrap: anywhere; }
+        .contact p { margin: 0 0 1.25rem; max-width: 50ch; color: var(--text-soft); }
+        .email {
+            font-size: clamp(1.5rem, 4.2vw, 2.5rem); font-weight: 500; letter-spacing: -.03em;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+            background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+            padding-bottom: .1em;
+        }
 
         /* Footer */
-        .site-footer { border-top: 1px solid var(--line); color: var(--ink-soft); font-size: .9rem; }
+        .site-footer { border-top: 1px solid var(--line); color: var(--text-faint); font-size: .9rem; }
         .site-footer .wrap { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-block: 1.75rem 2.25rem; }
-        .site-footer a { color: var(--ink-soft); }
+        .site-footer a { color: var(--text-faint); }
+        .site-footer a:hover { color: var(--text); }
 
         @media (max-width: 760px) {
             .section .wrap { grid-template-columns: 1fr; }
         }
-        @media (max-width: 560px) {
-            .site-nav { gap: 1.5rem; }
-            .game { grid-template-columns: 3rem minmax(0, 1fr); }
-            .game-icon { width: 3rem; }
-            .game-links { grid-column: 2; }
+        @media (max-width: 640px) {
+            .site-nav { gap: 1.25rem; }
+            .game-head { grid-template-columns: 4rem minmax(0, 1fr); }
+            .game-icon { width: 4rem; }
+            .game h3 { font-size: 1.3rem; }
+            .store-btn { grid-column: 1 / -1; width: 100%; }
+            /* Screenshots become a swipeable row */
+            .shots {
+                display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
+                margin-inline: calc(-1 * clamp(1.25rem, 3vw, 2rem));
+                padding-inline: clamp(1.25rem, 3vw, 2rem);
+                scroll-padding-inline: clamp(1.25rem, 3vw, 2rem);
+                scrollbar-width: none;
+            }
+            .shots::-webkit-scrollbar { display: none; }
+            .shots li { flex: 0 0 85%; scroll-snap-align: start; }
+        }
+        @media (max-width: 400px) {
+            /* Keep the header on one line on small phones */
+            .wrap { width: min(100% - 2.5rem, var(--wrap)); }
+            .site-header .wrap { column-gap: 1rem; }
+            .mark { font-size: 1rem; }
+            .site-nav { gap: .75rem; font-size: .875rem; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
         }
     </style>
 </head>
@@ -135,56 +224,49 @@
 <main id="top">
     <section class="hero">
         <div class="wrap">
-            <h1>Neonwhitepink</h1>
-            <p>An independent studio making mobile games for Android and iOS.</p>
+            <p class="eyebrow">Independent game studio</p>
+            <h1>Neonwhitepink<span>.</span></h1>
+            <p class="lead">We make mobile games that are quick to learn and hard to put down.</p>
+            <a class="hero-link" href="#games">
+                <span>Latest release</span> Portal Quest
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2v12m0 0l-5-5m5 5l5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
         </div>
     </section>
 
     <section class="section" id="games" aria-labelledby="games-title">
         <div class="wrap">
             <h2 id="games-title">Games</h2>
-            <ul class="games">
+            <div>
 
-                <!-- GAME: copy this whole <li> block to add a game.
-                     Replace the title, description and the store links (href="#").
-                     To use a real icon, replace "GD" with: <img src="icons/glow-drift.png" alt=""> -->
-                <li class="game">
-                    <div class="game-icon" aria-hidden="true">GD</div>
-                    <div>
-                        <h3>Glow Drift</h3>
-                        <p>One-thumb arcade racing through a city at night.</p>
+                <!-- GAME: to add another game, copy this whole <article> block below it,
+                     put its icon and screenshots in images/<game-name>/ and change the texts and store link. -->
+                <article class="game" aria-labelledby="portal-quest-title">
+                    <div class="game-head">
+                        <div class="game-icon">
+                            <img src="images/portal-quest/icon.webp" alt="" width="256" height="256">
+                        </div>
+                        <div>
+                            <h3 id="portal-quest-title">Portal Quest</h3>
+                            <ul class="game-meta" aria-label="Details">
+                                <li>Puzzle</li>
+                                <li>Android</li>
+                            </ul>
+                        </div>
+                        <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.neonwhitepink.portalquest" target="_blank" rel="noopener">
+                            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 2.5v11a.5.5 0 0 0 .76.43l9-5.5a.5.5 0 0 0 0-.86l-9-5.5A.5.5 0 0 0 4 2.5z" fill="currentColor"/></svg>
+                            Get it on Google Play
+                        </a>
                     </div>
-                    <div class="game-links">
-                        <a href="#">Google Play</a>
-                        <a href="#">App Store</a>
-                    </div>
-                </li>
+                    <p class="game-desc">A puzzle platformer built around portals. In 2329 you volunteer to train AION, an AI that has to learn space and cause and effect from the way people solve portal puzzles. Make your way through twisted levels and find out what you have really signed up for.</p>
+                    <ul class="shots" aria-label="Screenshots">
+                        <li><img src="images/portal-quest/screenshot-1.webp" alt="Portal Quest level with an acid pool between a blue and an orange portal" width="800" height="450" loading="lazy"></li>
+                        <li><img src="images/portal-quest/screenshot-2.webp" alt="The hero aims the portal gun at a ceiling panel in front of a city view" width="800" height="450" loading="lazy"></li>
+                        <li><img src="images/portal-quest/screenshot-3.webp" alt="A level with switches, a cube and portals on both sides of an acid pool" width="800" height="450" loading="lazy"></li>
+                    </ul>
+                </article>
 
-                <li class="game">
-                    <div class="game-icon" aria-hidden="true">PC</div>
-                    <div>
-                        <h3>Pop Circuit</h3>
-                        <p>A puzzle game about connecting wires and closing circuits.</p>
-                    </div>
-                    <div class="game-links">
-                        <a href="#">Google Play</a>
-                        <a href="#">App Store</a>
-                    </div>
-                </li>
-
-                <!-- A game that isn't out yet: no store links, just the status. -->
-                <li class="game">
-                    <div class="game-icon" aria-hidden="true">NB</div>
-                    <div>
-                        <h3>Night Bloom</h3>
-                        <p>A relaxing idle garden where flowers open after dark.</p>
-                    </div>
-                    <div class="game-links">
-                        <span class="status">In development</span>
-                    </div>
-                </li>
-
-            </ul>
+            </div>
         </div>
     </section>
 
@@ -192,7 +274,7 @@
         <div class="wrap">
             <h2 id="studio-title">Studio</h2>
             <div class="prose">
-                <p>Neonwhitepink makes mobile games that are quick to learn and easy to come back to. We design for phones first: short sessions, one-hand controls and solid performance on older devices.</p>
+                <p>Neonwhitepink is an independent studio making games for mobile. We design for phones first: clear touch controls, short levels and solid performance on older devices.</p>
                 <p>Every game we release keeps receiving updates and fixes for as long as people play it.</p>
             </div>
         </div>
@@ -203,8 +285,7 @@
             <h2 id="contact-title">Contact</h2>
             <div>
                 <p>For support, partnerships and press, write to us. We reply within a few days.</p>
-                <!-- Replace both the href and the visible address with your real email -->
-                <a class="email" href="mailto:contact@neonwhitepink.com">contact@neonwhitepink.com</a>
+                <a class="email" href="mailto:neonwhitepink@gmail.com">neonwhitepink@gmail.com</a>
             </div>
         </div>
     </section>
